@@ -86,7 +86,7 @@ module Synapse
    def list_app_tasks(app_id)
       response = @marathon.list_tasks(app_id)
       if response.success?
-        response.parsed_response[app_id]
+        response.parsed_response['tasks'].select {|task| task['appId'] == app_id }
       else
         log.warn "synapse: error polling Marathon host #{@discovery['hostname']}: #{response.error}"
         []
