@@ -30,7 +30,7 @@ module Synapse
       raise ArgumentError, "non-empty app_id is required for service #{@name}" \
         if @discovery['app_id'].nil? or @discovery['app_id'].empty?
       raise ArgumentError, "Invalid port_index value" \
-        if not @discovery['port_index'].nil? and not @discovery['port_index'].empty? and not @discovery['port_index'].match(/^\d+$/)
+        if not @discovery['port_index'].to_s.empty? and not @discovery['port_index'].match(/^\d+$/)
 
       @port_index = @discovery['port_index'].to_i || 0
     end
