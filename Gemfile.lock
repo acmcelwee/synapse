@@ -1,16 +1,28 @@
+GIT
+  remote: git://github.com/mesosphere/marathon_client.git
+  revision: 525b6be812a688a848e9ff0e477a4ba3cd1fa9f2
+  ref: 525b6be812a688a848e9ff0e477a4ba3cd1fa9f2
+  specs:
+    marathon_client (0.3.0)
+      httparty (~> 0.11)
+      trollop (~> 2.0)
+
 PATH
   remote: .
   specs:
     synapse (0.11.1)
       aws-sdk (~> 1.39)
       docker-api (~> 1.7.2)
+      marathon_client (~> 0.3.0)
       zk (~> 1.9.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
     archive-tar-minitar (0.5.2)
-    aws-sdk (1.47.0)
+    aws-sdk (1.57.0)
+      aws-sdk-v1 (= 1.57.0)
+    aws-sdk-v1 (1.57.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     coderay (1.0.9)
@@ -19,8 +31,11 @@ GEM
       archive-tar-minitar
       excon (>= 0.28)
       json
-    excon (0.38.0)
+    excon (0.41.0)
     ffi (1.9.3-java)
+    httparty (0.13.2)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.1)
     json (1.8.1-java)
     little-plugger (1.1.3)
@@ -28,11 +43,12 @@ GEM
       little-plugger (>= 1.1.3)
       multi_json (>= 1.8.4)
     method_source (0.8.2)
-    mini_portile (0.6.0)
+    mini_portile (0.6.1)
     multi_json (1.10.1)
-    nokogiri (1.6.2.1)
-      mini_portile (= 0.6.0)
-    nokogiri (1.6.2.1-java)
+    multi_xml (0.5.5)
+    nokogiri (1.6.4)
+      mini_portile (~> 0.6.0)
+    nokogiri (1.6.4-java)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -58,11 +74,12 @@ GEM
     slyphon-zookeeper_jar (3.3.5-java)
     spoon (0.0.4)
       ffi
+    trollop (2.0)
     zk (1.9.4)
       logging (~> 1.8.2)
       zookeeper (~> 1.4.0)
-    zookeeper (1.4.8)
-    zookeeper (1.4.8-java)
+    zookeeper (1.4.9)
+    zookeeper (1.4.9-java)
       slyphon-log4j (= 1.2.15)
       slyphon-zookeeper_jar (= 3.3.5)
 
@@ -71,6 +88,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  marathon_client!
   pry
   pry-nav
   rake
