@@ -20,7 +20,7 @@ describe Synapse::MarathonWatcher do
         "method" => "marathon",
         "hostname" => "marathon-server",
         "app_id" => "app_id",
-        "port_index" => "1"
+        "port_index" => 1
       }
     }
   end
@@ -53,6 +53,17 @@ describe Synapse::MarathonWatcher do
         expect {
           Synapse::MarathonWatcher.new(remove_discovery_arg('app_id'), mock_synapse)
         }.to raise_error(ArgumentError, /non-empty app_id/)
+      end
+    end
+
+    context 'when invalid arguments' do
+      it 'complains about invalid value' do
+        opts = remove_discovery_arg('port_index')
+        opts['discovery']['port_index'] = '1'
+
+        expect {
+          Synapse::MarathonWatcher.new(opts, mock_synapse)
+        }.to raise_error(ArgumentError, /Invalid port_index value/)
       end
     end
 
