@@ -66,8 +66,8 @@ describe Synapse::MarathonWatcher do
   end
 
   context "instance discovery" do
-    let(:instance1) { { "id" => "foo", "host" => "foo.example.com", "ports" => [80, 81, 82] } }
-    let(:instance2) { { "id" => "bar", "host" => "bar.example.com", "ports" => [90, 91, 92] } }
+    let(:instance1) { { "id" => "foo-123", "appId" => "/foo", "host" => "foo.example.com", "ports" => [80, 81, 82] } }
+    let(:instance2) { { "id" => "bar-12355", "appId" => "/bar", "host" => "bar.example.com", "ports" => [90, 91, 92] } }
 
     context 'using the Marathon API' do
       let(:marathon_client) { double('Marathon::Client') }
@@ -82,7 +82,9 @@ describe Synapse::MarathonWatcher do
         expect(task_list).to receive(:success?).and_return(true)
         expect(task_list).to receive(:parsed_response).and_return({ 'tasks' => [instance1, instance2] })
 
-        subject.send(:list_app_tasks, 'foo')
+        tasks = subject.send(:list_app_tasks, '/foo')
+
+        expect( tasks ).to eq( [instance1] )
       end
 
       it 'handles client errors' do
